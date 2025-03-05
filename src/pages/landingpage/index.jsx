@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Header from "../../component/header/Header.jsx";
-import RealEstateListings from "../../component/RealState.jsx";
+import Header from "../../component/header/index.jsx";
+import RealEstateListings from "./realstate/RealState.jsx";
+// import RealEstateListings from "../../component/RealState.jsx";
 
 const LandingPage = () => {
   const [activeToggle, setActiveToggle] = useState("Communities");

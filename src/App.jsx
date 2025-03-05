@@ -1,10 +1,12 @@
 import React from "react";
 import LandingPage from "./pages/landingpage";
+import Index from "./router";
 
 const App = () => {
   return (
     <div>
-      <LandingPage />
+      {/* <LandingPage /> */}
+      <Index />
     </div>
   );
 };

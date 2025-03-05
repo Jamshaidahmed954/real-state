@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Settings, X } from "lucide-react";
-import HouseCommunityMap from "./map";
-import FilterPopup from "./header/components/FilterPopup";
-import Range from "./header/components/Range";
+// import HouseCommunityMap from "../../../component/map";
+import HouseCommunityMap from "../../../component/map/index";
+import FilterPopup from "../../../component/header/components/FilterPopup";
+import Range from "../../../component/header/components/Range";
 // import HomeTypeFilter from "./header/components/HomeTypeFilter"; // Replaced with inline component
-import MoreFiltersPopup from "./header/components/MoreFiltersPopup";
+import MoreFiltersPopup from "../../../component/header/components/MoreFiltersPopup";
 
 const RealEstateListings = ({ searchQuery }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
