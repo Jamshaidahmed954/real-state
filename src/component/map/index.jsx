@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -10,6 +10,7 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import SearchContext from "../../context/SearchContext";
 
 const neighborhoodIcon = new L.Icon({
   iconUrl: "https://cdn-icons-png.flaticon.com/128/149/149294.png",
@@ -17,7 +18,6 @@ const neighborhoodIcon = new L.Icon({
   iconAnchor: [12, 24],
 });
 
-// Home icon for tooltip
 const homeIconUrl = "https://cdn-icons-png.flaticon.com/128/25/25694.png";
 
 const lots = [
@@ -107,7 +107,9 @@ const MapSearchHandler = ({ searchQuery }) => {
   return null;
 };
 
-const HouseMap = ({ searchQuery }) => {
+const HouseMap = () => {
+  const { searchQuery } = useContext(SearchContext);
+
   const center = [37.8, -122.435];
 
   return (
@@ -247,4 +249,24 @@ const HouseMap = ({ searchQuery }) => {
   );
 };
 
-export default HouseMap;
+const MapComponent = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={handleChange}
+        placeholder="Search for a lot or neighborhood"
+      />
+      <HouseMap searchQuery={searchQuery} />
+    </div>
+  );
+};
+
+export default MapComponent;

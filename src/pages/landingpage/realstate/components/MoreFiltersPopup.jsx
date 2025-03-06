@@ -85,7 +85,6 @@ const MoreFiltersPopup = ({
             </select>
           </div>
         </div>
-
         {/* Square Feet Range */}
         <div className="flex items-center gap-2">
           <div className="w-1/2">
@@ -119,7 +118,6 @@ const MoreFiltersPopup = ({
             </select>
           </div>
         </div>
-
         {/* Beds */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
@@ -141,7 +139,6 @@ const MoreFiltersPopup = ({
             </button>
           </div>
         </div>
-
         {/* Baths */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
@@ -163,18 +160,16 @@ const MoreFiltersPopup = ({
             </button>
           </div>
         </div>
-
         {/* Home Type */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
             Home Type
           </label>
           <HomeTypeFilter
-            onTypeChange={handleHomeTypeChange}
             selectedTypes={selectedHomeTypes}
+            onTypeChange={handleHomeTypeChange}
           />
         </div>
-
         {/* Lot Size */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
@@ -193,7 +188,6 @@ const MoreFiltersPopup = ({
             <option>Large</option>
           </select>
         </div>
-
         {/* Garage */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
@@ -212,7 +206,6 @@ const MoreFiltersPopup = ({
             <option>3+ Car</option>
           </select>
         </div>
-
         {/* Done Button */}
         <div className="mt-4">
           <button

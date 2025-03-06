@@ -1,9 +1,10 @@
 import React from "react";
 import Headers from "../component/header/index.jsx";
 import { Outlet } from "react-router-dom";
+
 const Layout = () => {
   return (
-    <div>
+    <div className="overflow-hidden h-screen">
       <Headers />
       <Outlet />
     </div>
