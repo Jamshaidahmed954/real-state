@@ -8,6 +8,7 @@ import {
 import RealEstateListings from "../pages/landingpage/realstate/RealState";
 import Layout from "../layout";
 import Home from "../pages/landingpage/homePage";
+import About from "../pages/landingpage/about";
 
 const Index = () => {
   const router = createBrowserRouter(
@@ -15,6 +16,7 @@ const Index = () => {
       <Route path="/" element={<Layout />}>
         <Route path="/realstate" element={<RealEstateListings />} />
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
       </Route>
     )
   );
