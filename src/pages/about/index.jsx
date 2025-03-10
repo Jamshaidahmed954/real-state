@@ -1,7 +1,8 @@
 import React from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import Footer from "../../../component/footer";
+import Footer from "../../component/footer";
 
+// import Footer from "../../components/Footer";
 export default function About() {
   const people = [
     {

@@ -17,7 +17,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
       <div
         className={`fixed right-0 top-0 h-full bg-white shadow-lg transform transition-transform duration-700 ease-in-out 
           ${isOpen ? "translate-x-0" : "translate-x-full"} 
-          w-80 md:w-96 lg:w-[600px] sm:w-full`} // Responsive width: full screen on small devices
+          w-full md:w-96 lg:w-[600px] sm:w-full`} // Responsive width: full screen on small devices
       >
         <div className="p-4 flex justify-between items-center border-b">
           <h2 className="text-lg font-semibold text-gray-800">
