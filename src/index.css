@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+/* @import url('https://fonts.googleapis.com/css2?family=Sofia&display=swap'); */
+
+body {
+    color: #012A5E;
+}
+
+.hero-section {
+    color: #012A5E;
+}
+
+/* absolute bottom-4 left-1/2 transform -translate-x-1/2 w-3/4 */
