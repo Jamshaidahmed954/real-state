@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Settings, X } from "lucide-react";
-// import HouseCommunityMap from "../../../component/map";
+import {
+  Settings,
+  X,
+  ChevronUp,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import HouseCommunityMap from "../../../component/map/index";
-import FilterPopup from "../../../component/header/components/FilterPopup";
-import Range from "../../../component/header/components/Range";
-// import HomeTypeFilter from "./header/components/HomeTypeFilter"; // Replaced with inline component
-import MoreFiltersPopup from "../../../component/header/components/MoreFiltersPopup";
+import FilterPopup from "./components/FilterPopup";
+import Range from "./components/Range";
+import MoreFiltersPopup from "./components/MoreFiltersPopup";
 
 const RealEstateListings = ({ searchQuery }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activePopup, setActivePopup] = useState(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeToggle, setActiveToggle] = useState("Floor Plans");
   const [sortOption, setSortOption] = useState("Price low to high");
   const popupRef = useRef(null);
@@ -24,6 +28,7 @@ const RealEstateListings = ({ searchQuery }) => {
   });
   const [lotSize, setLotSize] = useState(null);
   const [garage, setGarage] = useState(null);
+  const [mobileSheetHeight, setMobileSheetHeight] = useState("min");
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -64,8 +69,8 @@ const RealEstateListings = ({ searchQuery }) => {
   ];
 
   const getBedsBathsLabel = () => {
-    const bedsLabel = totalbeds > 0 ? `Beds ${totalbeds}` : "";
-    const bathsLabel = totalbaths > 0 ? `Baths ${totalbaths}` : "";
+    const bedsLabel = totalbeds > 0 ? `Beds ${totalbeds}+` : "";
+    const bathsLabel = totalbaths > 0 ? `Baths ${totalbaths}+` : "";
     return bedsLabel && bathsLabel
       ? `${bedsLabel}, ${bathsLabel}`
       : bedsLabel || bathsLabel || "Beds & Baths";
@@ -100,7 +105,7 @@ const RealEstateListings = ({ searchQuery }) => {
 
   const handlePriceChange = (newRange) => {
     setPriceRange(newRange);
-    setActivePopup(null);
+    // Popup stays open during selection
   };
 
   const handleHomeTypeChange = (newTypes) => {
@@ -108,10 +113,21 @@ const RealEstateListings = ({ searchQuery }) => {
     setActivePopup(null);
   };
 
-  // Standardized home type names
+  const toggleMobileSheetHeight = () => {
+    if (mobileSheetHeight === "min") {
+      setMobileSheetHeight("half");
+    } else if (mobileSheetHeight === "half") {
+      setMobileSheetHeight("full");
+    } else {
+      setMobileSheetHeight("min");
+    }
+  };
+
+  // Sample home data
   const allHomes = [
     {
       title: "Floor Plan: Artisan Two",
+      lotNumber: "165",
       size: 2606,
       beds: 3,
       baths: 3,
@@ -122,6 +138,7 @@ const RealEstateListings = ({ searchQuery }) => {
     },
     {
       title: "Floor Plan: Artisan Three",
+      lotNumber: "166",
       size: 2561,
       beds: 3,
       baths: 3,
@@ -132,6 +149,7 @@ const RealEstateListings = ({ searchQuery }) => {
     },
     {
       title: "Floor Plan: Modern Loft",
+      lotNumber: "167",
       size: 1800,
       beds: 2,
       baths: 2,
@@ -142,6 +160,7 @@ const RealEstateListings = ({ searchQuery }) => {
     },
     {
       title: "Brighton Community Home",
+      lotNumber: "168",
       size: 2561,
       beds: 3,
       baths: 3,
@@ -152,6 +171,7 @@ const RealEstateListings = ({ searchQuery }) => {
     },
     {
       title: "Quick Move-In: Ready Now",
+      lotNumber: "200",
       size: 2200,
       beds: 4,
       baths: 3,
@@ -162,6 +182,7 @@ const RealEstateListings = ({ searchQuery }) => {
     },
     {
       title: "Quick Move-In: Summer Move",
+      lotNumber: "430",
       size: 2000,
       beds: 3,
       baths: 2,
@@ -188,6 +209,14 @@ const RealEstateListings = ({ searchQuery }) => {
     } else if (activeToggle === "Floor Plans") {
       filteredHomes = filteredHomes.filter((home) =>
         home.title.toLowerCase().includes("floor plan")
+      );
+    }
+
+    if (searchQuery) {
+      filteredHomes = filteredHomes.filter(
+        (home) =>
+          home.lotNumber === searchQuery ||
+          home.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
@@ -225,6 +254,7 @@ const RealEstateListings = ({ searchQuery }) => {
     setHomeType(filteredHomes);
   }, [
     activeToggle,
+    searchQuery,
     priceRange,
     totalbeds,
     totalbaths,
@@ -233,7 +263,6 @@ const RealEstateListings = ({ searchQuery }) => {
     sortOption,
   ]);
 
-  // Inline HomeTypeFilter component
   const HomeTypeFilter = ({ onTypeChange }) => {
     const homeTypes = ["Single Family", "Townhome"];
     const [selected, setSelected] = useState(selectedHomeTypes);
@@ -247,7 +276,7 @@ const RealEstateListings = ({ searchQuery }) => {
     };
 
     return (
-      <div className="p-4">
+      <div className="p-4 w-[10rem]">
         {homeTypes.map((type) => (
           <label key={type} className="block mb-2">
             <input
@@ -263,8 +292,38 @@ const RealEstateListings = ({ searchQuery }) => {
     );
   };
 
+  const MobileFilters = () => (
+    <div className="flex overflow-x-auto py-4 gap-2 px-4 md:hidden">
+      <button
+        onClick={() => togglePopup("Price Range")}
+        className="px-3 py-1 bg-white border border-gray-300 rounded-full text-sm whitespace-nowrap"
+      >
+        {getPriceRangeLabel()}
+      </button>
+      <button
+        onClick={() => togglePopup("Beds & Baths")}
+        className="px-3 py-1 bg-white border border-gray-300 rounded-full text-sm whitespace-nowrap"
+      >
+        {getBedsBathsLabel()}
+      </button>
+      <button
+        onClick={() => togglePopup("Home Type")}
+        className="px-3 py-1 bg-white border border-gray-300 rounded-full text-sm whitespace-nowrap"
+      >
+        {getHomeTypeLabel()}
+      </button>
+      <button
+        onClick={() => togglePopup("More Filters")}
+        className="px-3 py-1 bg-white border border-gray-300 rounded-full text-sm flex items-center whitespace-nowrap"
+      >
+        <Settings className="mr-1 h-3 w-3" /> Filters
+      </button>
+    </div>
+  );
+
   return (
-    <div>
+    <div className="relative h-screen">
+      {/* Desktop filters */}
       <div className="rounded-lg p-4 my-4 hidden md:block">
         <div className="flex flex-wrap items-center gap-4 py-3">
           <div className="flex rounded-md shadow-sm p-1 border">
@@ -380,82 +439,185 @@ const RealEstateListings = ({ searchQuery }) => {
             </div>
           </div>
           <div className="ml-auto">
-            <button className="px-4 py-2 bg-[#99DDE5] text-gray-900 rounded-full hover:bg-[#99DDE5]">
+            <button className="px-4 py-2 bg-[#99DDE5] text-gray-900 rounded-full hover:bg-[#99DDE5] cursor-pointer">
               Contact our Team
             </button>
           </div>
         </div>
       </div>
 
-      <div className="flex md:h-[70vh] relative overflow-hidden flex-col-reverse">
+      {/* Main layout container */}
+      <div className="flex flex-col md:flex-row md:h-[calc(100vh-180px)] h-full relative overflow-hidden">
+        {/* Sidebar with listings */}
         <div
-          className={`p-6 shadow-md overflow-auto transition-all duration-500 bg-gray-200 md:md:absolute md:top-0 md:left-0 md:h-full ${
-            isSidebarOpen ? "md:w-[35%]" : "md:w-0 md:-translate-x-full"
-          }`}
+          className={`bg-gray-100 transition-all duration-300 ease-in-out overflow-auto
+            ${
+              isSidebarOpen
+                ? "md:w-1/3 md:min-w-[500px]"
+                : "md:w-0 md:min-w-0 md:opacity-0"
+            } 
+            md:block hidden`}
         >
-          <h2 className="text-xl font-bold">Brighton, CO</h2>
-          <div className="flex justify-between mt-4">
-            <span className="text-sm font-semibold">
-              {homeType.length} Listings
-            </span>
-            <select
-              className="border p-2 rounded-md text-sm"
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-            >
-              <option value="Price high to low">Price high to low</option>
-              <option value="Price low to high">Price low to high</option>
-              <option value="Community (A-Z)">Community (A-Z)</option>
-              <option value="Community (Z-A)">Community (Z-A)</option>
-            </select>
-          </div>
+          <div className="p-6">
+            <h2 className="text-xl font-bold">Brighton, CO</h2>
+            <div className="flex justify-between mt-4">
+              <span className="text-sm font-semibold">
+                {homeType.length} Listings
+              </span>
+              <select
+                className="border p-2 rounded-md text-sm"
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+              >
+                <option value="Price high to low">Price high to low</option>
+                <option value="Price low to high">Price low to high</option>
+                <option value="Community (A-Z)">Community (A-Z)</option>
+                <option value="Community (Z-A)">Community (Z-A)</option>
+              </select>
+            </div>
 
-          <div className="md:mt-6 overflow-auto">
-            {homeType.length > 0 ? (
-              homeType.map((home, index) => (
-                <div
-                  key={index}
-                  className="rounded-lg p-4 mb-4 overflow-auto bg-white shadow-md"
-                >
-                  <img
-                    className="w-full h-40 object-cover rounded-md"
-                    src={home.image}
-                    alt="House"
-                  />
-                  <h3 className="text-lg font-bold mt-2">{home.title}</h3>
-                  <p className="text-sm text-gray-600">
-                    {home.type} | {home.size} ft² | {home.beds} Bed |{" "}
-                    {home.baths} Bath
-                  </p>
-                  <p className="text-blue-600 font-bold mt-2">
-                    Priced from{" "}
-                    {home.price
-                      ? `$${home.price.toLocaleString()}`
-                      : "$XXX,XXX"}
-                  </p>
-                </div>
-              ))
-            ) : (
-              <p className="text-gray-500 mt-4">No homes available.</p>
-            )}
+            {/* Desktop listings */}
+            <div className="mt-6 pb-6">
+              {homeType.length > 0 ? (
+                homeType.map((home, index) => (
+                  <div
+                    key={index}
+                    className="rounded-lg p-4 mb-4 bg-white shadow-md"
+                  >
+                    <img
+                      className="w-full h-40 object-cover rounded-md"
+                      src={home.image}
+                      alt="House"
+                    />
+                    <h3 className="text-lg font-bold mt-2">{home.title}</h3>
+                    <p className="text-sm text-gray-600">
+                      Lot {home.lotNumber} | {home.type} | {home.size} ft² |{" "}
+                      {home.beds} Bed | {home.baths} Bath
+                    </p>
+                    <p className="text-blue-600 font-bold mt-2">
+                      Priced from{" "}
+                      {home.price
+                        ? `$${home.price.toLocaleString()}`
+                        : "$XXX,XXX"}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-500 mt-4">No homes available.</p>
+              )}
+            </div>
           </div>
         </div>
 
+        {/* Map area */}
+        <div className="w-full h-full md:flex-grow relative">
+          <HouseCommunityMap />
+          <button
+            className="absolute top-1/2 transform -translate-y-1/2 z-50 hidden md:flex items-center justify-center bg-white shadow-md rounded-r-md h-12 w-8 border border-gray-300 border-l-0"
+            style={{
+              left: isSidebarOpen ? "0" : "0px",
+            }}
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            {isSidebarOpen ? (
+              <ChevronLeft className="h-5 w-5" />
+            ) : (
+              <ChevronRight className="h-5 w-5" />
+            )}
+          </button>
+          {/* Mobile quick filters */}
+          <div className="md:hidden">
+            <MobileFilters />
+          </div>
+
+          {/* Mobile bottom bar */}
+          <div
+            className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-40 md:hidden border-t border-gray-300"
+            onClick={() =>
+              setMobileSheetHeight(mobileSheetHeight === "min" ? "half" : "min")
+            }
+          >
+            <div className="flex justify-between items-center p-3">
+              <div>
+                <span className="font-bold">Brighton, CO</span>
+                <span className="ml-2 text-sm text-gray-600">
+                  {homeType.length} listings
+                </span>
+              </div>
+              <button className="p-2">
+                <ChevronUp className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile bottom sheet */}
         <div
-          className={`transition-all duration-500 h-full ${
-            isSidebarOpen ? "w-[100%] md:ml-[35%]" : "w-full ml-0"
+          className={`fixed bottom-0 left-0 right-0 bg-white z-50 rounded-t-xl shadow-lg md:hidden transition-all duration-300 transform ${
+            mobileSheetHeight === "min"
+              ? "translate-y-full"
+              : mobileSheetHeight === "half"
+              ? "translate-y-0 h-1/2"
+              : "translate-y-0 h-5/6"
           }`}
         >
-          <div className="w-full h-full relative">
-            <HouseCommunityMap searchQuery={searchQuery} />
+          <div className="flex justify-center items-center border-b border-gray-200 p-2 relative">
+            <div className="w-16 h-1 bg-gray-300 rounded-full mx-auto"></div>
             <button
-              className={
-                "absolute md:top-1/2 bottom-1/2 bg-white transform border-r-2 border-t-2 border-b-2 border-gray-400 -translate-y-1/2 text-xl w-10 h-16  p-2 z-50 transition-all duration-500 "
-              }
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="absolute right-4 p-2"
+              onClick={toggleMobileSheetHeight}
             >
-              {isSidebarOpen ? "<" : ">"}
+              {mobileSheetHeight === "full" ? (
+                <ChevronDown className="h-5 w-5" />
+              ) : (
+                <ChevronUp className="h-5 w-5" />
+              )}
             </button>
+          </div>
+
+          <div className="p-3 flex justify-between items-center border-b border-gray-200">
+            <h2 className="text-xl font-bold">
+              Brighton, CO ({homeType.length})
+            </h2>
+            <select
+              className="border p-1 rounded-md text-sm"
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+            >
+              <option value="Price low to high">Price: Low to High</option>
+              <option value="Price high to low">Price: High to Low</option>
+              <option value="Community (A-Z)">A-Z</option>
+              <option value="Community (Z-A)">Z-A</option>
+            </select>
+          </div>
+
+          <div className="overflow-y-auto h-[calc(100%-84px)]">
+            {homeType.length > 0 ? (
+              homeType.map((home, index) => (
+                <div key={index} className="p-4 border-b border-gray-200">
+                  <div className="flex">
+                    <img
+                      className="w-24 h-24 object-cover rounded-md mr-3"
+                      src={home.image}
+                      alt={home.title}
+                    />
+                    <div>
+                      <h3 className="font-bold text-sm">{home.title}</h3>
+                      <p className="text-xs text-gray-600">
+                        Lot {home.lotNumber} | {home.type} | {home.beds} Bd |{" "}
+                        {home.baths} Ba
+                      </p>
+                      <p className="text-xs text-gray-600">{home.size} ft²</p>
+                      <p className="text-blue-600 font-bold text-sm mt-1">
+                        ${home.price.toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500 p-4">No homes available.</p>
+            )}
           </div>
         </div>
       </div>

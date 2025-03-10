@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Range = ({ onPriceChange }) => {
-  // Price options array for easier management
   const minPriceOptions = [
     { label: "No Min", value: 0 },
     { label: "$50,000", value: 50000 },
     { label: "$100,000", value: 100000 },
-    { label: "$550000", value: 550000 },
+    { label: "$550,000", value: 550000 },
   ];
 
   const maxPriceOptions = [
@@ -16,39 +15,33 @@ const Range = ({ onPriceChange }) => {
     { label: "$1,000,000", value: 1000000 },
   ];
 
-  // State for selected values
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(Infinity);
 
-  // Handle min price change
-  const handleMinChange = (e) => {
-    const newMin = Number(e.target.value);
-    // Ensure min doesn't exceed max
-    if (newMin > maxPrice && maxPrice !== Infinity) {
-      return;
-    }
-    setMinPrice(newMin);
-  };
-
-  // Handle max price change
-  const handleMaxChange = (e) => {
-    const newMax = Number(e.target.value);
-    // Ensure max isn't less than min
-    if (newMax < minPrice && newMax !== Infinity) {
-      return;
-    }
-    setMaxPrice(newMax);
-  };
-
-  // Handle done button click
-  const handleDone = () => {
-    // Pass selected values to parent component if callback exists
+  // Use useEffect to trigger onPriceChange whenever minPrice or maxPrice changes
+  useEffect(() => {
     if (onPriceChange) {
       onPriceChange({
         min: minPrice === 0 ? null : minPrice,
         max: maxPrice === Infinity ? null : maxPrice,
       });
     }
+  }, [minPrice, maxPrice, onPriceChange]);
+
+  const handleMinChange = (e) => {
+    const newMin = Number(e.target.value);
+    if (newMin > maxPrice && maxPrice !== Infinity) {
+      return;
+    }
+    setMinPrice(newMin);
+  };
+
+  const handleMaxChange = (e) => {
+    const newMax = Number(e.target.value);
+    if (newMax < minPrice && newMax !== Infinity) {
+      return;
+    }
+    setMaxPrice(newMax);
   };
 
   return (
@@ -94,8 +87,9 @@ const Range = ({ onPriceChange }) => {
           </div>
         </div>
 
+        {/* You can keep the button if you want, but it's not necessary for updates anymore */}
         <button
-          onClick={handleDone}
+          onClick={() => {}} // Empty function since updates happen automatically
           className="w-full px-4 py-2 mt-4 font-semibold text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           Done

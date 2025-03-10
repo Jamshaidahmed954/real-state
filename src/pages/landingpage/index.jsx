@@ -1,24 +1,17 @@
 import React, { useState } from "react";
-import Header from "../../component/header/index.jsx";
 import RealEstateListings from "./realstate/RealState.jsx";
-// import RealEstateListings from "../../component/RealState.jsx";
 
 const LandingPage = () => {
   const [activeToggle, setActiveToggle] = useState("Communities");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); // Ensure this is a string initially
+  console.log("LandingPage searchQuery:", searchQuery);
 
   return (
-    <div calssName="w-full h-screen overflow-hidden ">
-      <Header
-        setActiveToggle={setActiveToggle}
-        activeToggle={activeToggle}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
-      <div className=" h-[70vh] overflow- w-full">
+    <div className="w-full h-screen overflow-hidden">
+      <div className="h-[70vh] w-full over-flow-hidden">
         <RealEstateListings
-          activeToggle={activeToggle}
-          searchQuery={searchQuery}
+        // activeToggle={activeToggle}
+        // searchQuery={searchQuery}
         />
       </div>
     </div>

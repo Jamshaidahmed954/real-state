@@ -27,7 +27,7 @@ export default function HomeTypeFilter({ onTypeChange }) {
   };
 
   return (
-    <div className="w-80 p-4 bg-white shadow-lg rounded-lg">
+    <div className=" shadow-lg rounded-lg  ">
       <h2 className="text-gray-700 font-semibold mb-3">Home Type</h2>
       <div className="flex flex-wrap gap-2">
         {homeTypes.map((type) => (
@@ -49,7 +49,7 @@ export default function HomeTypeFilter({ onTypeChange }) {
       </div>
       <button
         onClick={handleDone}
-        className="w-full mt-4 py-2 bg-blue-900 text-white rounded-lg font-semibold"
+        className="w-full mt-4 py-2 bg-[#001B3D] text-white rounded-full font-semibold"
       >
         Done
       </button>

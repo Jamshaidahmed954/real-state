@@ -7,7 +7,10 @@ import {
 } from "react-router-dom";
 import RealEstateListings from "../pages/landingpage/realstate/RealState";
 import Layout from "../layout";
-import Home from "../pages/landingpage/homePage";
+import Home from "../pages/homePage";
+import About from "../pages/about";
+import Career from "../pages/career";
+import WhyBrookField from "../pages/career/whyBrookField";
 
 const Index = () => {
   const router = createBrowserRouter(
@@ -15,6 +18,9 @@ const Index = () => {
       <Route path="/" element={<Layout />}>
         <Route path="/realstate" element={<RealEstateListings />} />
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/career" element={<Career />} />
+        <Route path="/career/why-brookfield" element={<WhyBrookField />} />
       </Route>
     )
   );
