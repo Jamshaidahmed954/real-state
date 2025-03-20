@@ -1,61 +1,52 @@
 "use client";
-import React from "react";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import { HiMiniBars3CenterLeft } from "react-icons/hi2";
 import SearchContext from "../../context/SearchContext";
 
 export default function Header({ isOpen, setIsOpen }) {
   const { searchQuery, setSearchQuery } = useContext(SearchContext);
-  const [showSearch, setShowSearch] = useState(false); // State to show/hide search input
+  const [showSearch, setShowSearch] = useState(false);
+
+  const toggleSearch = () => setShowSearch((prev) => !prev);
+  const toggleMenu = () => setIsOpen((prev) => !prev);
 
   return (
-    <header className="border-b border-gray-200 sticky md:static top-0 left-0 z-10 bg-white w-full">
-      <div className="container mx-auto px-4 w-full">
-        <div className="flex items-center justify-between py-4 w-full">
-          {/* Logo (Hidden on small mobile, visible on larger screens) */}
-          <div className="w-36 md:w-48 hidden sm:block">
+    <header className="sticky top-0 left-0 z-10 w-full bg-white border-b border-gray-200 md:static">
+      <div className="container px-4 mx-auto">
+        <div className="flex items-center justify-between w-full py-4">
+          {/* Logo */}
+          <div className="hidden w-36 sm:block md:w-48">
             <img
               src="https://cdn.brookfieldresidential.net/-/media/brp/global/home-logo/logo/brookfieldlogo.svg?rev=357c61f724e443f39ae9a44bf574c035"
-              alt="Brookfield Residential"
-              className="h-auto w-full"
+              alt="Brookfield Residential Logo"
+              className="w-full h-auto"
+              loading="lazy"
             />
           </div>
 
-          {/* Mobile spacer to help with centering (only visible on smallest screens) */}
-          <div className="w-8 sm:hidden"></div>
+          {/* Spacer for mobile */}
+          <div className="w-8 sm:hidden" aria-hidden="true" />
 
-          {/* Search Section - Centered */}
-          <div className="flex-1 flex justify-center items-center max-w-md mx-auto">
-            <div
-              className={`flex items-center rounded-full px-3 py-2 bg-white transition-all duration-200 ${
-                showSearch
-                  ? "w-full border border-gray-200"
-                  : "w-auto border-none"
-              } md:w-full md:border md:border-gray-200`}
-            >
-              {/* Location Icon (Hidden on mobile when search is collapsed) */}
+          {/* Search Section */}
+          <div className="flex items-center justify-center flex-1 max-w-md mx-4">
+            <div className="flex items-center w-full rounded-full bg-white border-1 transition-all duration-200 px-4">
               <FaMapMarkerAlt
-                className={`text-sky-500 text-lg mr-2 ${
-                  showSearch ? "block" : "hidden"
-                } md:block`}
+                className="text-sky-500 text-lg mr-2"
+                aria-hidden="true"
               />
-
-              {/* Search Input (Hidden on mobile by default) */}
               <input
                 type="number"
-                onChange={(e) => setSearchQuery(e.target.value)}
                 value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search Lot"
-                className={`outline-none text-sky-500 font-semibold flex-grow placeholder:text-sky-500 transition-all ${
-                  showSearch ? "block" : "hidden"
-                } md:block`}
+                className="flex-grow text-sky-500 font-semibold placeholder:text-sky-500 p-2 outline-none bg-transparent"
+                aria-label="Search by lot number"
               />
-
-              {/* Search Button (Toggles input on mobile) */}
               <button
-                className="w-8 h-8 flex items-center justify-center bg-sky-500 rounded-full flex-shrink-0"
-                onClick={() => setShowSearch(!showSearch)}
+                onClick={toggleSearch}
+                className="flex items-center justify-center w-8 h-8 bg-sky-500 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-300"
+                aria-label={showSearch ? "Collapse search" : "Expand search"}
               >
                 <FaSearch className="text-white" />
               </button>
@@ -64,30 +55,28 @@ export default function Header({ isOpen, setIsOpen }) {
 
           {/* Navigation & Menu */}
           <div className="flex items-center">
-            <nav className="hidden md:flex items-center gap-8 border-r px-6">
+            <nav className="hidden md:flex items-center gap-8 pr-6 border-r border-gray-200">
               <a
                 href="#"
-                className="text-gray-700 hover:text-gray-900 font-medium"
+                className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
               >
                 About
               </a>
               <a
                 href="#"
-                className="text-gray-700 hover:text-gray-900 font-medium whitespace-nowrap"
+                className="text-gray-700 hover:text-gray-900 font-medium transition-colors whitespace-nowrap"
               >
-                Where we build
+                Where We Build
               </a>
             </nav>
-
-            {/* Mobile Menu Button */}
-            <span className="cursor-pointer bg-white rounded-full p-2">
-              <HiMiniBars3CenterLeft
-                onClick={() => {
-                  setIsOpen(!isOpen);
-                }}
-                size={30}
-              />
-            </span>
+            <button
+              onClick={toggleMenu}
+              className="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-300 md:ml-4"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isOpen}
+            >
+              <HiMiniBars3CenterLeft size={30} className="text-gray-700" />
+            </button>
           </div>
         </div>
       </div>

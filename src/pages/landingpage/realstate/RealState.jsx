@@ -322,7 +322,7 @@ const RealEstateListings = ({ searchQuery }) => {
   );
 
   return (
-    <div className="relative h-screen">
+    <div className="relative h-screen overflow-hidden">
       {/* Desktop filters */}
       <div className="rounded-lg p-4 my-4 hidden md:block">
         <div className="flex flex-wrap items-center gap-4 py-3">
@@ -510,7 +510,7 @@ const RealEstateListings = ({ searchQuery }) => {
         </div>
 
         {/* Map area */}
-        <div className="w-full h-full md:flex-grow relative">
+        <div className="w-full h-full md:flex-grow relative overflow-hidden">
           <HouseCommunityMap />
           <button
             className="absolute top-1/2 transform -translate-y-1/2 z-50 hidden md:flex items-center justify-center bg-white shadow-md rounded-r-md h-12 w-8 border border-gray-300 border-l-0"

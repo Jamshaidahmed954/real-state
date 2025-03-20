@@ -108,7 +108,6 @@ export default function WhyBrookField() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

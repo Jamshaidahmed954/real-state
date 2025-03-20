@@ -1,8 +1,23 @@
 import React from "react";
 import { useState } from "react";
 import { X } from "lucide-react";
+import { Link } from "react-router-dom";
+import blogs from "../../pages/new&blogs/data/blogs";
 
 export default function Sidebar({ isOpen, setIsOpen }) {
+  const companyLinks = [
+    { name: "About", path: "/about" },
+    { name: "Careers", path: "/career" },
+    { name: "Contact", path: "/contact" },
+    { name: "Investors", path: "/investors" },
+  ];
+
+  const blogLinks = [
+    { name: "Life and Style", path: "about/blogs" },
+    { name: "Home Buyer Resources", path: "/blogs/home-buyer-resources" },
+    { name: "All Topics", path: "/blogs/all-topics" },
+  ];
+
   return (
     <>
       {/* Sidebar Overlay */}
@@ -19,30 +34,43 @@ export default function Sidebar({ isOpen, setIsOpen }) {
           ${isOpen ? "translate-x-0" : "translate-x-full"} 
           w-full md:w-96 lg:w-[600px] sm:w-full`} // Responsive width: full screen on small devices
       >
-        <div className="p-4 flex justify-between items-center border-b">
+        <div
+          onClick={() => setIsOpen(false)}
+          className="p-4 flex justify-between items-center border-b"
+        >
           <h2 className="text-lg font-semibold text-gray-800">
             Brookfield Residential
           </h2>
           <button onClick={() => setIsOpen(false)}>
-            <X className="w-6 h-6 text-gray-700" />
+            <X className="w-6 h-6 text-gray-700 cursor-pointer" />
           </button>
         </div>
 
         {/* Sidebar Content */}
-        <div className="p-4 overflow-y-auto h-full ">
+        <div className="p-4 overflow-y-auto h-full flex flex-col gap-6">
           <h3 className="text-xl font-bold mb-4 text-gray-800">
             The Future of Home
           </h3>
-          <div className="flex">
-            <div className="mb-6 ">
-              <h4 className="text-lg font-semibold text-gray-800">Empower</h4>
+          <div className="flex space-y-6">
+            <div className="mb-6 flex flex-col gap-4">
+              <div className="text-lg font-semibold text-gray-800">
+                <img
+                  src="https://cdn.brookfieldresidential.net/-/media/brp/empower/empower-logo/empower/empower.svg?rev=5a1e3e43918d48459dbe58833e52c5d9"
+                  alt=""
+                />
+              </div>
               <p className="text-sm text-gray-600">
                 From smart technology to sustainable living - discover the
                 future of home.
               </p>
             </div>
-            <div className="mb-6">
-              <h4 className="text-lg font-semibold text-gray-800">myTime</h4>
+            <div className="mb-6 flex flex-col gap-4">
+              <div className="text-lg font-semibold text-gray-800">
+                <img
+                  src="https://cdn.brookfieldresidential.net/-/media/brp/mytime/mytime_logo/myvision/mytime/mytime.svg?rev=a25ae4e8fd0942208ce12980436a47a6"
+                  alt=""
+                />
+              </div>
               <p className="text-sm text-gray-600">
                 Tour available and model homes on your own - even before or
                 after hours.
@@ -50,33 +78,24 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             </div>
           </div>
 
-          {/* Additional Sections from Screenshot */}
+          {/* Additional Sections */}
           <div className="grid grid-cols-2 gap-4 mt-6">
             <div>
               <h3 className="text-lg font-semibold mb-2 text-gray-800">
                 Company
               </h3>
               <ul className="space-y-2">
-                <li>
-                  <a href="#" className="text-blue-600 hover:underline">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-blue-600 hover:underline">
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-blue-600 hover:underline">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-blue-600 hover:underline">
-                    Investors
-                  </a>
-                </li>
+                {companyLinks.map((link) => (
+                  <li key={link.path}>
+                    <Link
+                      onClick={() => setIsOpen(false)}
+                      to={link.path}
+                      className="text-blue-600 hover:underline cursor-pointer"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
@@ -84,21 +103,17 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                 News & Blog
               </h3>
               <ul className="space-y-2">
-                <li>
-                  <a href="#" className="text-blue-600 hover:underline">
-                    Life and Style
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-blue-600 hover:underline">
-                    Home Buyer Resources
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-blue-600 hover:underline">
-                    All Topics
-                  </a>
-                </li>
+                {blogLinks.map((link) => (
+                  <li key={link.path}>
+                    <Link
+                      onClick={() => setIsOpen(false)}
+                      to={link.path}
+                      className="text-blue-600 hover:underline"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

@@ -133,7 +133,6 @@ const Career = () => {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     </>
   );
