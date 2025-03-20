@@ -13,7 +13,7 @@ const Layout = () => {
         <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

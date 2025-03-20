@@ -21,7 +21,7 @@ export default function About() {
 
         {/* Navigation Tabs */}
         <div className="flex justify-between py-6  items-center shadow-md mx-auto w-full ">
-          <div className="flex justify-center items-center gap-20 space-x-4 mx-4 w-full">
+          <div className="flex justify-around  items-center space-x-4  w-full overflow-auto">
             {[
               {
                 name: "About",
@@ -51,7 +51,7 @@ export default function About() {
               <Link
                 to={tab.link}
                 key={index}
-                className={`text-blue-950 font-semibold ${
+                className={`text-blue-950 text-lg ${
                   path == tab.link ? "border-orange-400" : "border-transparent"
                 } border-b-4  `}
               >

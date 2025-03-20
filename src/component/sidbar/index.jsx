@@ -1,21 +1,19 @@
 import React from "react";
-import { useState } from "react";
 import { X } from "lucide-react";
 import { Link } from "react-router-dom";
-import blogs from "../../pages/new&blogs/data/blogs";
 
 export default function Sidebar({ isOpen, setIsOpen }) {
   const companyLinks = [
     { name: "About", path: "/about" },
     { name: "Careers", path: "/career" },
     { name: "Contact", path: "/contact" },
-    { name: "Investors", path: "/investors" },
+    { name: "Investors", path: "about/financial" },
   ];
 
   const blogLinks = [
     { name: "Life and Style", path: "about/blogs" },
-    { name: "Home Buyer Resources", path: "/blogs/home-buyer-resources" },
-    { name: "All Topics", path: "/blogs/all-topics" },
+    { name: "Home Buyer Resources", path: "about/blogs" },
+    { name: "All Topics", path: "about/blogs" },
   ];
 
   return (

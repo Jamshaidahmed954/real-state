@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import { HiMiniBars3CenterLeft } from "react-icons/hi2";
 import SearchContext from "../../context/SearchContext";
+import { Link } from "react-router-dom";
 
 export default function Header({ isOpen, setIsOpen }) {
   const { searchQuery, setSearchQuery } = useContext(SearchContext);
@@ -12,7 +13,7 @@ export default function Header({ isOpen, setIsOpen }) {
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
   return (
-    <header className="sticky top-0 left-0 z-10 w-full bg-white border-b border-gray-200 md:static">
+    <header className="fixed top-0 left-0 z-10 w-full bg-white border-b border-gray-200">
       <div className="container px-4 mx-auto">
         <div className="flex items-center justify-between w-full py-4">
           {/* Logo */}
@@ -56,12 +57,12 @@ export default function Header({ isOpen, setIsOpen }) {
           {/* Navigation & Menu */}
           <div className="flex items-center">
             <nav className="hidden md:flex items-center gap-8 pr-6 border-r border-gray-200">
-              <a
-                href="#"
+              <Link
+                to={"/about"}
                 className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
               >
                 About
-              </a>
+              </Link>
               <a
                 href="#"
                 className="text-gray-700 hover:text-gray-900 font-medium transition-colors whitespace-nowrap"
@@ -71,11 +72,14 @@ export default function Header({ isOpen, setIsOpen }) {
             </nav>
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-300 md:ml-4"
+              className="p-2 rounded-full focus:outline-none  md:ml-4"
               aria-label="Toggle navigation menu"
               aria-expanded={isOpen}
             >
-              <HiMiniBars3CenterLeft size={30} className="text-gray-700" />
+              <HiMiniBars3CenterLeft
+                size={20}
+                className="text-gray-700 cursor-pointer"
+              />
             </button>
           </div>
         </div>
