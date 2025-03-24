@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Header({ isOpen, setIsOpen }) {
   const { searchQuery, setSearchQuery } = useContext(SearchContext);
+
   const [showSearch, setShowSearch] = useState(false);
 
   const toggleSearch = () => setShowSearch((prev) => !prev);
