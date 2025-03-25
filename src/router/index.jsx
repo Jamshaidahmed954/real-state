@@ -5,7 +5,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import RealEstateListings from "../pages/landingpage/realstate/RealState";
+// import RealEstateListings from "../pages/landingpage/realstate/RealState";
 import Layout from "../layout";
 import Home from "../pages/homePage";
 import About from "../pages/about";
@@ -16,9 +16,12 @@ import Blogs from "../pages/new&blogs";
 import LeaderShip from "../pages/about/component/leadership/LeaderShip";
 import Distinction from "../pages/about/component/distinction/Distinction";
 import History from "../pages/about/component/history/History";
-import Values from "../pages/about/component/values/Values";
+// import Values from "../pages/about/component/values/Values";
 import Financils from "../pages/about/component/financial/Financials";
 import AboutSection from "../pages/about/component/aboutSection/AboutSection";
+import RealEstateListings from "../pages/realstate";
+import Values from "../pages/about/component/values";
+// import RealEstateListings from "../pages/realstate";
 
 const Index = () => {
   const router = createBrowserRouter(

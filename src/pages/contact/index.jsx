@@ -21,7 +21,7 @@ const Contact = () => {
   return (
     <div>
       {/* image */}
-      <div className="w-full h-[50vh] ">
+      <div className="w-full h-[50vh] mt-[85px  ]">
         <img
           src="https://cdn.brookfieldresidential.net/-/media/brp/global/modules/home-page-hero/home-page-hero-addison-community-exterior-1920x1280.jpg?rev=3ee24fa804734b1c97adc86ac8965b67"
           alt=""

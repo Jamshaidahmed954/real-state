@@ -7,10 +7,13 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import HouseCommunityMap from "../../../component/map/index";
 import FilterPopup from "./components/FilterPopup";
 import Range from "./components/Range";
 import MoreFiltersPopup from "./components/MoreFiltersPopup";
+import HouseMapScreen from "../../component/map";
+import Footer from "../../component/footer";
+import { Link } from "react-router-dom";
+import allHomes from "./data/homs";
 
 const RealEstateListings = ({ searchQuery }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -29,6 +32,7 @@ const RealEstateListings = ({ searchQuery }) => {
   const [lotSize, setLotSize] = useState(null);
   const [garage, setGarage] = useState(null);
   const [mobileSheetHeight, setMobileSheetHeight] = useState("min");
+  const [isMapVisible, setIsMapVisible] = useState(true);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -105,7 +109,6 @@ const RealEstateListings = ({ searchQuery }) => {
 
   const handlePriceChange = (newRange) => {
     setPriceRange(newRange);
-    // Popup stays open during selection
   };
 
   const handleHomeTypeChange = (newTypes) => {
@@ -122,76 +125,6 @@ const RealEstateListings = ({ searchQuery }) => {
       setMobileSheetHeight("min");
     }
   };
-
-  // Sample home data
-  const allHomes = [
-    {
-      title: "Floor Plan: Artisan Two",
-      lotNumber: "165",
-      size: 2606,
-      beds: 3,
-      baths: 3,
-      price: 547900,
-      type: "Single Family",
-      image:
-        "https://cdn.brookfieldresidential.net/-/media/brp/alberta/calgary-and-area/renderings/laned-homes/york/calgary-brookfieldresidential-newhomes-york-prairie.jpg?cx=0.5&cy=0.5&cw=158&ch=111",
-    },
-    {
-      title: "Floor Plan: Artisan Three",
-      lotNumber: "166",
-      size: 2561,
-      beds: 3,
-      baths: 3,
-      price: 560000,
-      type: "Single Family",
-      image:
-        "https://cdn.brookfieldresidential.net/-/media/brp/alberta/calgary-and-area/renderings/laned-homes/york/calgary-brookfieldresidential-newhomes-york-prairie.jpg?cx=0.5&cy=0.5&cw=158&ch=111",
-    },
-    {
-      title: "Floor Plan: Modern Loft",
-      lotNumber: "167",
-      size: 1800,
-      beds: 2,
-      baths: 2,
-      price: 1900,
-      type: "Townhome",
-      image:
-        "https://cdn.brookfieldresidential.net/-/media/brp/alberta/calgary-and-area/renderings/laned-homes/york/calgary-brookfieldresidential-newhomes-york-prairie.jpg?cx=0.5&cy=0.5&cw=158&ch=111",
-    },
-    {
-      title: "Brighton Community Home",
-      lotNumber: "168",
-      size: 2561,
-      beds: 3,
-      baths: 3,
-      price: 520000,
-      type: "Single Family",
-      image:
-        "https://cdn.brookfieldresidential.net/-/media/brp/alberta/calgary-and-area/renderings/laned-homes/york/calgary-brookfieldresidential-newhomes-york-prairie.jpg?cx=0.5&cy=0.5&cw=158&ch=111",
-    },
-    {
-      title: "Quick Move-In: Ready Now",
-      lotNumber: "200",
-      size: 2200,
-      beds: 4,
-      baths: 3,
-      price: 590000,
-      type: "Single Family",
-      image:
-        "https://cdn.brookfieldresidential.net/-/media/brp/alberta/calgary-and-area/renderings/laned-homes/york/calgary-brookfieldresidential-newhomes-york-prairie.jpg?cx=0.5&cy=0.5&cw=158&ch=111",
-    },
-    {
-      title: "Quick Move-In: Summer Move",
-      lotNumber: "430",
-      size: 2000,
-      beds: 3,
-      baths: 2,
-      price: 480000,
-      type: "Townhome",
-      image:
-        "https://cdn.brookfieldresidential.net/-/media/brp/alberta/calgary-and-area/renderings/laned-homes/york/calgary-brookfieldresidential-newhomes-york-prairie.jpg?cx=0.5&cy=0.5&cw=158&ch=111",
-    },
-  ];
 
   const [homeType, setHomeType] = useState(allHomes);
 
@@ -322,9 +255,9 @@ const RealEstateListings = ({ searchQuery }) => {
   );
 
   return (
-    <div className="relative h-screen overflow-hidden mt-20">
+    <div className="relative h-[87vh]">
       {/* Desktop filters */}
-      <div className="rounded-lg p-4 my-4 hidden md:block">
+      <div className="rounded-lg px-4 hidden md:block">
         <div className="flex flex-wrap items-center gap-4 py-3">
           <div className="flex rounded-md shadow-sm p-1 border">
             {menuItems.map(({ name, count }) => (
@@ -351,7 +284,7 @@ const RealEstateListings = ({ searchQuery }) => {
               <div key={filter} className="relative">
                 <button
                   onClick={() => togglePopup(filter)}
-                  className="px-4 py-2 bg-white border border-gray-300 rounded-md hover:bg-gray-50 flex items-center gap-2"
+                  className="px-4 py-[6px] bg-white border border-gray-300 rounded-md hover:bg-gray-50 flex items-center gap-2 cursor-pointer"
                 >
                   {filter === "Price Range"
                     ? getPriceRangeLabel()
@@ -412,7 +345,7 @@ const RealEstateListings = ({ searchQuery }) => {
             <div className="relative">
               <button
                 onClick={() => togglePopup("More Filters")}
-                className="px-4 py-2 bg-white border border-gray-300 rounded-md hover:bg-gray-50 flex items-center"
+                className="px-4 py-[6px] bg-white border border-gray-300 rounded-md hover:bg-gray-50 flex items-center cursor-pointer"
               >
                 <Settings className="mr-2 h-4 w-4" /> More Filters
               </button>
@@ -439,21 +372,24 @@ const RealEstateListings = ({ searchQuery }) => {
             </div>
           </div>
           <div className="ml-auto">
-            <button className="px-4 py-2 bg-[#99DDE5] text-gray-900 rounded-full hover:bg-[#99DDE5] cursor-pointer">
+            <Link
+              to={"/contact"}
+              className="px-4 py-2 bg-[#99DDE5] text-gray-90 rounded-full hover:bg-[#99DDE5] cursor-pointer"
+            >
               Contact our Team
-            </button>
+            </Link>
           </div>
         </div>
       </div>
 
       {/* Main layout container */}
-      <div className="flex flex-col md:flex-row md:h-[calc(100vh-180px)] h-full relative overflow-hidden">
+      <div className="flex flex-col md:flex-row md:h-[calc(100vh-180px)] h-full relative overflow-hidden bg-blue-100">
         {/* Sidebar with listings */}
         <div
           className={`bg-gray-100 transition-all duration-300 ease-in-out overflow-auto
             ${
               isSidebarOpen
-                ? "md:w-1/3 md:min-w-[500px]"
+                ? "md:w-1/3 md:min-w-[600px]"
                 : "md:w-0 md:min-w-0 md:opacity-0"
             } 
             md:block hidden`}
@@ -482,7 +418,7 @@ const RealEstateListings = ({ searchQuery }) => {
                 homeType.map((home, index) => (
                   <div
                     key={index}
-                    className="rounded-lg p-4 mb-4 bg-white shadow-md"
+                    className="rounded-lg p-4 mb-4 bg-white shadow-xl shadow-blue-100 hover:border cursor-pointer sha"
                   >
                     <img
                       className="w-full h-40 object-cover rounded-md"
@@ -495,7 +431,7 @@ const RealEstateListings = ({ searchQuery }) => {
                       {home.beds} Bed | {home.baths} Bath
                     </p>
                     <p className="text-blue-600 font-bold mt-2">
-                      Priced from{" "}
+                      Priced from
                       {home.price
                         ? `$${home.price.toLocaleString()}`
                         : "$XXX,XXX"}
@@ -506,17 +442,41 @@ const RealEstateListings = ({ searchQuery }) => {
                 <p className="text-gray-500 mt-4">No homes available.</p>
               )}
             </div>
+            <Footer />
           </div>
         </div>
 
         {/* Map area */}
         <div className="w-full h-full md:flex-grow relative overflow-hidden">
-          <HouseCommunityMap />
+          {/* Map visibility toggle button */}
+          <div className="absolute top-4 right-4 z-20">
+            <button
+              className="relative p-2 bg-white rounded-full shadow-md border border-gray-300 hover:bg-gray-100 group"
+              onClick={() => setIsMapVisible(!isMapVisible)}
+            >
+              {isMapVisible ? (
+                <ChevronDown className="h-5 w-5" />
+              ) : (
+                <ChevronUp className="h-5 w-5" />
+              )}
+              {/* Tooltip */}
+              <span className="absolute top-full mt-2 right-0 w-max px-2 py-1 text-sm text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                {isMapVisible ? "Hide Map" : "Show Map"}
+              </span>
+            </button>
+          </div>
+
+          {/* Map component with conditional rendering */}
+          <div
+            className={`h-full transition-all duration-300 ${
+              isMapVisible ? "opacity-100" : "opacity-0 h-0"
+            }`}
+          >
+            <HouseMapScreen />
+          </div>
+
           <button
-            className="absolute top-1/2 transform -translate-y-1/2  hidden md:flex items-center justify-center bg-white shadow-md rounded-r-md h-12 w-8 border border-gray-300 border-l-0 z-0"
-            style={{
-              left: isSidebarOpen ? "0" : "0px",
-            }}
+            className="absolute top-1/2 transform -translate-y-1/2 hidden md:flex items-center justify-center bg-white shadow-md cursor-pointer h-14 w-8 border-t-2 border-r-2 border-b-2 border-gray-500 z-0 group"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           >
             {isSidebarOpen ? (
@@ -524,6 +484,9 @@ const RealEstateListings = ({ searchQuery }) => {
             ) : (
               <ChevronRight className="h-5 w-5" />
             )}
+            <span className="absolute top-1/2 -translate-y-1/2 left-full ml-2 w-max px-2 py-1 text-sm text-white bg-gray-500 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              {isSidebarOpen ? "Collaps side panel" : "Expand side panel"}
+            </span>
           </button>
           {/* Mobile quick filters */}
           <div className="md:hidden">
@@ -574,7 +537,6 @@ const RealEstateListings = ({ searchQuery }) => {
               )}
             </button>
           </div>
-
           <div className="p-3 flex justify-between items-center border-b border-gray-200">
             <h2 className="text-xl font-bold">
               Brighton, CO ({homeType.length})
@@ -590,12 +552,11 @@ const RealEstateListings = ({ searchQuery }) => {
               <option value="Community (Z-A)">Z-A</option>
             </select>
           </div>
-
-          <div className="overflow-y-auto h-[calc(100%-84px)]">
+          <div className="overflow-y-auto h-[calc(100%-84px)] ">
             {homeType.length > 0 ? (
               homeType.map((home, index) => (
-                <div key={index} className="p-4 border-b border-gray-200">
-                  <div className="flex">
+                <div key={index} className="p-4 border-b border-gray-200 ">
+                  <div className="flex  hover:border-2 cursor-pointer">
                     <img
                       className="w-24 h-24 object-cover rounded-md mr-3"
                       src={home.image}
@@ -619,6 +580,7 @@ const RealEstateListings = ({ searchQuery }) => {
               <p className="text-gray-500 p-4">No homes available.</p>
             )}
           </div>
+          <Footer />
         </div>
       </div>
     </div>

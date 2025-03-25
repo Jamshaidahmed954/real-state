@@ -32,7 +32,7 @@ import SearchContext from "../../context/SearchContext";
 const HOME_ICON_AVAILABLE =
   "https://png.pngtree.com/png-clipart/20220605/original/pngtree-3d-home-icon-with-green-square-frame-png-image_7961176.png";
 const HOME_ICON_SOLD =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAAAclBMVEX/////AAD//Pz/YmL/Zmb/d3f/rq7/trb/+fn/zs7/SUn/bW3/9fX/7e3/sbH/8vL/h4f/xcX/1dX/jo7/oKD/5+f/4OD/Li7/vr7/29v/KCj/PT3/MzP/Tk7/Xl7/kpL/ISH/gYH/FRX/p6f/WFj/mJha3kEtAAAEzklEQVR4nO2c6ZaiQAyFBUVBZXNB3Fpxef9XHKVNAEmgShZnzuT+miNLfRQhdRPoGQxEIpFIJBKJ/jOZrhN6Xui4JruLvXVKWtgdMkXLo5HqGGyZXebW2SjpErhdIZmrXTbOeUlP1qqM9NS9K6ikOI5F3ZP5jIYadYO0Pr4PNI3UoYZ8EDbQYloeae98F2pyIccafxNqTA9lGKuvQfkWx2QYs+LD3huUO+SZDOOnQNUXlLOpYjKMXdg/VHyoZjKMzaRnKJPJ0EXdccheoBIVpkd27xEquqkxZdm9e6ioNpwyHaJ+oCaECXloRmets9cH1JU+fWKbS3rLtXMok8ni6Wo3obfNOoZa0yc/xL+bwz1NtbY7hFrQg07RBK/p53LvdAc1oR+72TrbxaVv74ZZk5pDMVncKp6YCfduoLiwKBm6mDZ+XUCtaaOyiWEH7wr/cujIax/KIbz4Q8fFa7t/Nwys4qKfXqAmO/Kc6C/99N6isWPCvVUozqgEUOJtX3UW1jHmvWsoO6DPiNWBg/N4xhBja4p2oBijskG7W5jHEwyzUPESn0JtSyVwqgOEuHkqbgh8OJB+NtqAYrLOEIZel560I5TtVSVYI6gVzZRUTcceJnF+Km9sDuUm5KkuGOIxPdYYxhrThrAJFFNuXrB2unIrCtYxYTWVPpRDPz83zOIVMTPC7F5ZR2tDMRd5xLQ9qhruBn7Gr1pzdKEYC4LtQ6fODNB5rAlUbRZXMChoaphaQxeq3DRMdYarnyutbZhHmejUg3Jopimst3NFFzCE+FswNfVQnYnJPje48IhmJoS2gfOtMcfwLubWJGBUnJqMmNcFRuVK1ZMSkp/QZ8cQV+oC5UaFsPFoo2gpvHVgvPgOrtivXc/ehS6ZS8ZE370oxotPIYu7yl2g3MGQRxlnRvTdC2I6KrhoqHikilF9OtwvE47nKc6L4/L6CdJTOCoT7nc2X3FG5QpH3DXKzDct4dH16HvBhXtdiM+ZlUdNOGpItxXocGeM/h46KmXfq6cjnoiOyw0R7jGdRdCBaNTijA6wcLpMuHtvSHZNiJvM6yo9XSGwmFx3Kry/tBPmLBjiLSAZuceYKVUtP2Pa0uECTUNuvj/QEKKBaURiw2SwpXfYwA5NQ7wwKjxkUfWgTLhgRyVsI5wy4SJKe7JL2uZivOoMgo7pQ38ucMlmQm9/ZHeunITr0WphqimBe8D4/OuAnERMGcwK2lDYXKOT44iE2kM0Mn3zxsI8Smb3EbXwZ1lcw/fqCV0yVdF6hF3BN4ctZUxamEeD98BaPrP5mzlYvfbW972aVBBY4yLVcZ7OYN6kYl/cVS6jPhVGbmGtB+8cZT/twF8wWb5VHcCs5LM7rjPYq0AvzmSvtuVBqGAOyBWn3u8v2DTkOxItCz7qsl85uvCNzKn4i+oLg8b6wYIhDfcgzzSwYytwzP6hsq6LuQiseD6o0Beg6iVQAiVQAiVQAvU3QB2mpJS/j+sEyhvYhNSr6k6gSl/f/EqgBEqgBEqgBEqgBEqgBEqgBEqgBEqg/i+opC8onT+4V34p2hQqoI8ntaC/W2od6hLSx5NS/bOXplCB3v93ofipGwPlqR1taYT5U7YzG9Xrh5l+Z6hw8CisfL0nEolEIpFI9G/oD9UaW/jl/KYWAAAAAElFTkSuQmCCdata:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAAAclBMVEX/////AAD//Pz/YmL/Zmb/d3f/rq7/trb/+fn/zs7/SUn/bW3/9fX/7e3/sbH/8vL/h4f/xcX/1dX/jo7/oKD/5+f/4OD/Li7/vr7/29v/KCj/PT3/MzP/Tk7/Xl7/kpL/ISH/gYH/FRX/p6f/WFj/mJha3kEtAAAEzklEQVR4nO2c6ZaiQAyFBUVBZXNB3Fpxef9XHKVNAEmgShZnzuT+miNLfRQhdRPoGQxEIpFIJBKJ/jOZrhN6Xui4JruLvXVKWtgdMkXLo5HqGGyZXebW2SjpErhdIZmrXTbOeUlP1qqM9NS9K6ikOI5F3ZP5jIYadYO0Pr4PNI3UoYZ8EDbQYloeae98F2pyIccafxNqTA9lGKuvQfkWx2QYs+LD3huUO+SZDOOnQNUXlLOpYjKMXdg/VHyoZjKMzaRnKJPJ0EXdccheoBIVpkd27xEquqkxZdm9e6ioNpwyHaJ+oCaECXloRmets9cH1JU+fWKbS3rLtXMok8ni6Wo3obfNOoZa0yc/xL+bwz1NtbY7hFrQg07RBK/p53LvdAc1oR+72TrbxaVv74ZZk5pDMVncKp6YCfduoLiwKBm6mDZ+XUCtaaOyiWEH7wr/cujIax/KIbz4Q8fFa7t/Nwys4qKfXqAmO/Kc6C/99N6isWPCvVUozqgEUOJtX3UW1jHmvWsoO6DPiNWBg/N4xhBja4p2oBijskG7W5jHEwyzUPESn0JtSyVwqgOEuHkqbgh8OJB+NtqAYrLOEIZel560I5TtVSVYI6gVzZRUTcceJnF+Km9sDuUm5KkuGOIxPdYYxhrThrAJFFNuXrB2unIrCtYxYTWVPpRDPz83zOIVMTPC7F5ZR2tDMRd5xLQ9qhruBn7Gr1pzdKEYC4LtQ6fODNB5rAlUbRZXMChoaphaQxeq3DRMdYarnyutbZhHmejUg3Jopimst3NFFzCE+FswNfVQnYnJPje48IhmJoS2gfOtMcfwLubWJGBUnJqMmNcFRuVK1ZMSkp/QZ8cQV+oC5UaFsPFoo2gpvHVgvPgOrtivXc/ehS6ZS8ZE370oxotPIYu7yl2g3MGQRxlnRvTdC2I6KrhoqHikilF9OtwvE47nKc6L4/L6CdJTOCoT7nc2X3FG5QpH3DXKzDct4dH16HvBhXtdiM+ZlUdNOGpItxXocGeM/h46KmXfq6cjnoiOyw0R7jGdRdCBaNTijA6wcLpMuHtvSHZNiJvM6yo9XSGwmFx3Kry/tBPmLBjiLSAZuceYKVUtP2Pa0uECTUNuvj/QEKKBaURiw2SwpXfYwA5NQ7wwKjxkUfWgTLhgRyVsI5wy4SJKe7JL2uZivOoMgo7pQ38ucMlmQm9/ZHeunITr0WphqimBe8D4/OuAnERMGcwK2lDYXKOT44iE2kM0Mn3zxsI8Smb3EbXwZ1lcw/fqCV0yVdF6hF3BN4ctZUxamEeD98BaPrP5mzlYvfbW972aVBBY4yLVcZ7OYN6kYl/cVS6jPhVGbmGtB+8cZT/twF8wWb5VHcCs5LM7rjPYq0AvzmSvtuVBqGAOyBWn3u8v2DTkOxItCz7qsl85uvCNzKn4i+oLg8b6wYIhDfcgzzSwYytwzP6hsq6LuQiseD6o0Beg6iVQAiVQAiVQAvU3QB2mpJS/j+sEyhvYhNSr6k6gSl/f/EqgBEqgBEqgBEqgBEqgBEqgBEqgBEqg/i+opC8onT+4V34p2hQqoI8ntaC/W2od6hLSx5NS/bOXplCB3v93ofipGwPlqR1taYT5U7YzG9Xrh5l+Z6hw8CisfL0nEolEIpFI9G/oD9UaW/jl/KYWAAAAAElFTkSuQmCC";
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPAw1KkGTDTqHgvDt3HI_23B2hteakfiT9Bg&s";
 const DEFAULT_MODEL_URL =
   "https://fnbfozyjoymkhaankgps.supabase.co/storage/v1/object/public/housingsystem//house.glb";
 
@@ -288,7 +288,7 @@ const HouseViewer = ({ isOpen, onClose, lot }) => {
           </div>
 
           <button
-            className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md transition-colors"
+            className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md transition-colors cursor-pointer"
             onClick={onClose}
           >
             Close
@@ -525,16 +525,16 @@ const HouseMapScreen = () => {
   }, []);
 
   // Handlers
-  const handleSearchChange = useCallback(
-    (e) => {
-      setSearchQuery(e.target.value);
-    },
-    [setSearchQuery]
-  );
+  // const handleSearchChange = useCallback(
+  //   (e) => {
+  //     setSearchQuery(e.target.value);
+  //   },
+  //   [setSearchQuery]
+  // );
 
-  const handleClearSearch = useCallback(() => {
-    setSearchQuery("");
-  }, [setSearchQuery]);
+  // const handleClearSearch = useCallback(() => {
+  //   setSearchQuery("");
+  // }, [setSearchQuery]);
 
   const handleLotSelect = useCallback((lot) => {
     setSelectedLot(lot);
@@ -545,64 +545,17 @@ const HouseMapScreen = () => {
   }, []);
 
   return (
-    <div className="w-screen h-screen flex flex-col bg-gray-100">
+    <div className="w-screen h-screen flex flex-col bg-gray-100 border-2 border-gray-500">
       {/* Enhanced Header with Search and Stats */}
-      <header className="w-full bg-gray-800 text-white p-4 flex flex-col md:flex-row items-start md:items-center justify-between shadow-md space-y-2 md:space-y-0">
+      {/* <header className="w-full bg-gray-800 text-white p-4 flex flex-col md:flex-row items-start md:items-center justify-between shadow-md space-y-2 md:space-y-0">
         <div>
           <h1 className="text-2xl font-bold">House Map Explorer</h1>
           <div className="text-gray-400 text-sm mt-1">
-            Showing {stats.total} lots • {stats.available} available •{" "}
+            Showing {stats.total} lots • {stats.available} available •
             {stats.sold} sold
           </div>
         </div>
-
-        <div className="relative w-full md:w-1/3">
-          <input
-            type="text"
-            value={searchQuery || ""}
-            onChange={handleSearchChange}
-            placeholder="Search by lot number, status, or size..."
-            className="p-3 pl-10 rounded-md text-black w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg
-              className="w-5 h-5 text-gray-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              ></path>
-            </svg>
-          </div>
-          {searchQuery && (
-            <button
-              onClick={handleClearSearch}
-              className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
-            </button>
-          )}
-        </div>
-      </header>
+      </header> */}
 
       {/* Map and Modal Container */}
       <div className="relative flex-1">
@@ -654,9 +607,11 @@ const HouseMapScreen = () => {
                       lot.status === "available" ? "#10B981" : "#EF4444",
                     fillOpacity: 0.3,
                   }}
-                  eventHandlers={{
-                    click: () => handleLotSelect(lot),
-                  }}
+                  eventHandlers={
+                    {
+                      // click: () => handleLotSelect(lot),
+                    }
+                  }
                 >
                   <Popup>
                     <div className="p-1">
@@ -680,7 +635,7 @@ const HouseMapScreen = () => {
                       </div>
                       <button
                         onClick={() => handleLotSelect(lot)}
-                        className="mt-3 bg-blue-600 hover:bg-blue-700 text-white w-full py-1 px-2 rounded text-sm"
+                        className="mt-3 bg-blue-600 hover:bg-blue-700 text-white w-full py-1 px-2 rounded text-sm cursor-pointer"
                       >
                         View 3D Model
                       </button>
@@ -691,9 +646,11 @@ const HouseMapScreen = () => {
                 <Marker
                   position={lotCenter}
                   icon={getIcon(lot.status)}
-                  eventHandlers={{
-                    click: () => handleLotSelect(lot),
-                  }}
+                  eventHandlers={
+                    {
+                      // click: () => handleLotSelect(lot),
+                    }
+                  }
                 />
               </React.Fragment>
             );

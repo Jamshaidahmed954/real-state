@@ -1,8 +1,19 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 export default function Footer() {
+  const location = useLocation();
+  const path = location.pathname;
   return (
-    <footer className=" text-black text-sm mt-10">
-      <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+    <footer
+      className={` ${
+        path === "/realstate" ? "bg-blue-950" : "bg-white"
+      } text-sm mt-10 `}
+    >
+      <div
+        className={`${
+          path === "/realstate" ? "hidden" : "block"
+        } max-w-7xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-6`}
+      >
         {/* Column 1 */}
         <div>
           <h3 className="font-semibold">The Future of Home</h3>
@@ -113,35 +124,71 @@ export default function Footer() {
       </div>
 
       {/* Bottom Links */}
-      <div className="border-t border-gray-600 py-4 text-center text-gray-400 flex justify-between w-[80%] mx-auto mt-6">
+      <div
+        className={`${
+          path === "/realstate" ? "flex-row-reverse border-none" : "border-t"
+        }  border-gray-600 py-4 text-center text-gray-400 flex justify-between w-[80%] mx-auto mt-6`}
+      >
         <ul className="flex flex-wrap justify-center gap-4 text-xs">
           <li>
-            <a href="#" className="text-blue-950 font-semibold hover:underline">
+            <a
+              href="#"
+              className={`${
+                path === "/realstate" ? "text-white" : "text-blue-950"
+              }  font-semibold hover:underline`}
+            >
               Sitemap
             </a>
           </li>
           <li>
-            <a href="#" className="text-blue-950 font-semibold hover:underline">
+            <a
+              href="#"
+              className={`${
+                path === "/realstate" ? "text-white" : "text-blue-950"
+              }  font-semibold hover:underline`}
+            >
               Privacy
             </a>
           </li>
           <li>
-            <a href="#" className="text-blue-950 font-semibold hover:underline">
+            <a
+              href="#"
+              className={`${
+                path === "/realstate" ? "text-white" : "text-blue-950"
+              }  font-semibold hover:underline`}
+            >
               Terms
             </a>
           </li>
           <li>
-            <a href="#" className="text-blue-950 font-semibold hover:underline">
+            <a
+              href="#"
+              className={`${
+                path === "/realstate" ? "text-white" : "text-blue-950"
+              }  font-semibold hover:underline`}
+            >
               Cookie Settings
             </a>
           </li>
           <li>
-            <a href="#" className="text-blue-950 font-semibold hover:underline">
+            <a
+              href="#"
+              className={`${
+                path === "/realstate" ? "text-white" : "text-blue-950"
+              }  font-semibold hover:underline`}
+            >
               Your Privacy Choices
             </a>
           </li>
         </ul>
-        <div className="w-36">
+        <div className="w-36 text-white">
+          <h1
+            className={`${
+              path === "/realstate" ? "block" : "hidden"
+            } text-2xl font-bold`}
+          >
+            Brookfield
+          </h1>
           <img
             src="https://cdn.brookfieldresidential.net/-/media/brp/global/home-logo/logo/brookfieldlogo.svg?rev=357c61f724e443f39ae9a44bf574c035"
             alt="Brookfield Residential"

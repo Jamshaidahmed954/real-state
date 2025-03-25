@@ -9,7 +9,7 @@ export default function About() {
   console.log(path);
   return (
     <>
-      <div className="w-full  md:p-0">
+      <div className="w-full  md:p-0 lg:mt-[85px]">
         {/* Hero Section */}
         <div
           className="relative w-full h-[50vh] bg-cover bg-center hidden lg:block"
